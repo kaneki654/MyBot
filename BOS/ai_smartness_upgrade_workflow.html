@@ -1,0 +1,143 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .wrap { padding: 20px 16px 28px; font-family: var(--font-sans); }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 10px; }
+  .problem-row { display: flex; gap: 10px; margin-bottom: 18px; }
+  .prob-card { flex: 1; border-radius: var(--border-radius-lg); padding: 12px 14px; cursor: pointer; transition: opacity .15s; }
+  .prob-card:hover { opacity: .8; }
+  .prob-title { font-size: 13px; font-weight: 500; margin-bottom: 3px; }
+  .prob-sub { font-size: 12px; }
+  .p-red { background: #FCEBEB; border: 1px solid #F09595; }
+  .p-red .prob-title { color: #791F1F; }
+  .p-red .prob-sub { color: #A32D2D; }
+  @media (prefers-color-scheme: dark) {
+    .p-red { background: #501313; border-color: #791F1F; }
+    .p-red .prob-title { color: #F7C1C1; }
+    .p-red .prob-sub { color: #F09595; }
+  }
+  .divider { display: flex; align-items: center; gap: 10px; margin: 6px 0 16px; }
+  .divider-line { flex: 1; height: 1px; background: var(--color-border-tertiary); }
+  .divider-label { font-size: 12px; color: var(--color-text-tertiary); white-space: nowrap; }
+  .step-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; margin-top: 2px; }
+  .step-body { flex: 1; border-radius: 10px; padding: 11px 14px; cursor: pointer; transition: background .15s; border: 1px solid transparent; }
+  .step-body:hover { background: var(--color-background-secondary); }
+  .step-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
+  .step-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 500; border-radius: 20px; padding: 1px 8px; margin-left: 6px; vertical-align: middle; }
+
+  .s-teal .step-num { background: #9FE1CB; color: #085041; }
+  .s-purple .step-num { background: #CECBF6; color: #26215C; }
+  .s-amber .step-num { background: #FAC775; color: #412402; }
+  .s-coral .step-num { background: #F5C4B3; color: #4A1B0C; }
+  .s-green .step-num { background: #C0DD97; color: #173404; }
+  @media (prefers-color-scheme: dark) {
+    .s-teal .step-num { background: #0F6E56; color: #9FE1CB; }
+    .s-purple .step-num { background: #3C3489; color: #CECBF6; }
+    .s-amber .step-num { background: #633806; color: #FAC775; }
+    .s-coral .step-num { background: #712B13; color: #F5C4B3; }
+    .s-green .step-num { background: #27500A; color: #C0DD97; }
+  }
+
+  .tag-teal { background: #E1F5EE; color: #085041; }
+  .tag-purple { background: #EEEDFE; color: #26215C; }
+  .tag-amber { background: #FAEEDA; color: #412402; }
+  .tag-coral { background: #FAECE7; color: #4A1B0C; }
+  .tag-green { background: #EAF3DE; color: #173404; }
+  @media (prefers-color-scheme: dark) {
+    .tag-teal { background: #04342C; color: #9FE1CB; }
+    .tag-purple { background: #26215C; color: #CECBF6; }
+    .tag-amber { background: #412402; color: #FAC775; }
+    .tag-coral { background: #4A1B0C; color: #F5C4B3; }
+    .tag-green { background: #173404; color: #C0DD97; }
+  }
+  .connector { width: 2px; height: 14px; background: var(--color-border-secondary); margin: 0 0 0 23px; }
+</style>
+<div class="wrap">
+
+  <div class="section-label">Why it's outputting garbage</div>
+  <div class="problem-row">
+    <div class="prob-card p-red" onclick="sendPrompt('Why does a character-level LSTM output garbled text instead of real words?')">
+      <div class="prob-title">Character-level model</div>
+      <div class="prob-sub">Learns single chars, not words or meaning</div>
+    </div>
+    <div class="prob-card p-red" onclick="sendPrompt('Why is a small hidden size bad for language modeling?')">
+      <div class="prob-title">Hidden size too small</div>
+      <div class="prob-sub">128 units can't hold complex patterns</div>
+    </div>
+    <div class="prob-card p-red" onclick="sendPrompt('Why does an LSTM forget context and how does a transformer fix it?')">
+      <div class="prob-title">LSTM forgets context</div>
+      <div class="prob-sub">Can't look back more than ~50 chars</div>
+    </div>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-label">upgrade path (do these in order)</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="step-row s-teal">
+    <div class="step-num">1</div>
+    <div class="step-body" onclick="sendPrompt('How do I build a word-level or BPE tokenizer from scratch in Python with NumPy only?')">
+      <div class="step-title">Switch to word-level tokenization <span class="tag tag-teal">biggest impact</span></div>
+      <div class="step-desc">Instead of one character at a time, learn one word (or subword) at a time. "def" becomes a single token, not 3 characters. This alone will fix most of the gibberish.</div>
+    </div>
+  </div>
+  <div class="connector"></div>
+
+  <div class="step-row s-teal">
+    <div class="step-num">2</div>
+    <div class="step-body" onclick="sendPrompt('What kind of programming text data should I use to train my AI on coding? Where do I get it?')">
+      <div class="step-title">Feed it real, structured training data</div>
+      <div class="step-desc">Replace the small default text with actual Python code files, Q&A pairs, or documentation. The model learns what it sees — garbage in, garbage out. Create a big my_training_data.txt.</div>
+    </div>
+  </div>
+  <div class="connector"></div>
+
+  <div class="step-row s-purple">
+    <div class="step-num">3</div>
+    <div class="step-body" onclick="sendPrompt('How do I increase the hidden size and add more LSTM layers to make my AI smarter?')">
+      <div class="step-title">Increase hidden size + stack 2 LSTM layers <span class="tag tag-purple">quick win</span></div>
+      <div class="step-desc">Raise hidden_size from 128 → 512. Add a second LSTM layer on top. More capacity = more patterns it can memorize. This requires retraining from scratch.</div>
+    </div>
+  </div>
+  <div class="connector"></div>
+
+  <div class="step-row s-purple">
+    <div class="step-num">4</div>
+    <div class="step-body" onclick="sendPrompt('How many epochs should I train my LSTM language model and how do I know when to stop?')">
+      <div class="step-title">Train longer with a learning rate schedule</div>
+      <div class="step-desc">100 epochs on tiny data is nothing. Train 500–2000 epochs. Add a warmup + cosine decay schedule to stop the model from bouncing around. Watch loss — it should keep going down.</div>
+    </div>
+  </div>
+  <div class="connector"></div>
+
+  <div class="step-row s-amber">
+    <div class="step-num">5</div>
+    <div class="step-body" onclick="sendPrompt('How do I add an attention mechanism on top of an LSTM in NumPy from scratch?')">
+      <div class="step-title">Add an attention mechanism <span class="tag tag-amber">major upgrade</span></div>
+      <div class="step-desc">Attention lets the model look back at all past tokens, not just the last hidden state. This is the core of what makes modern AI actually coherent. Can be added on top of your existing LSTM.</div>
+    </div>
+  </div>
+  <div class="connector"></div>
+
+  <div class="step-row s-coral">
+    <div class="step-num">6</div>
+    <div class="step-body" onclick="sendPrompt('How do I replace my LSTM with a full Transformer architecture from scratch using NumPy?')">
+      <div class="step-title">Replace LSTM with a Transformer <span class="tag tag-coral">full rebuild</span></div>
+      <div class="step-desc">The architecture used by GPT, LLaMA, and all modern LLMs. Self-attention + feed-forward blocks stacked N times. Far better at long-range dependencies. This is Phase 2 of the big workflow.</div>
+    </div>
+  </div>
+  <div class="connector"></div>
+
+  <div class="step-row s-green">
+    <div class="step-num">7</div>
+    <div class="step-body" onclick="sendPrompt('How do I add a system prompt and instruction tuning to make my AI follow instructions?')">
+      <div class="step-title">Add instruction tuning (fine-tune to follow commands)</div>
+      <div class="step-desc">Train on prompt → response pairs so it learns to answer questions, not just predict the next word. Format: "User: give me a code\nAI: ..." This is what makes it feel like a real assistant.</div>
+    </div>
+  </div>
+
+</div>

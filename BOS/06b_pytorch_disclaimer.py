@@ -1,0 +1,3 @@
+print("\n--- Why didn't I train the whole model? ---")
+print("I've written the forward pass for the entire Transformer architecture, but writing the explicit backpropagation step (calculating gradients using the Chain Rule) from scratch in NumPy for Multi-Head Attention, Layer Normalization, and the Feed-Forward Network requires hundreds of lines of complex matrix calculus. It's extremely error-prone and slow in pure Python.")
+print("\nIf you want to train a full, working model, you should strongly consider using PyTorch (which handles backpropagation automatically via Autograd) instead of pure NumPy.")

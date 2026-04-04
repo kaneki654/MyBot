@@ -1,0 +1,129 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  .wrap { padding: 24px 20px 32px; display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .phase { width: 100%; max-width: 580px; border-radius: var(--border-radius-lg); padding: 16px 20px 18px; cursor: default; position: relative; }
+  .phase-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .badge { font-size: 11px; font-weight: 500; border-radius: 20px; padding: 2px 10px; letter-spacing: .03em; flex-shrink: 0; }
+  .phase-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+  .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; }
+  .step { font-size: 13px; color: var(--color-text-secondary); display: flex; align-items: flex-start; gap: 7px; padding: 5px 9px; border-radius: 8px; cursor: pointer; transition: background .15s, color .15s; line-height: 1.4; }
+  .step:hover { background: var(--color-background-secondary); color: var(--color-text-primary); }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+
+  .arrow-wrap { display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; max-width: 580px; }
+  .arrow-line { width: 2px; height: 28px; background: var(--color-border-secondary); }
+  .arrow-head { width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 9px solid var(--color-border-secondary); }
+
+  /* Phase colors */
+  .p1 { background: #E1F5EE; border: 1px solid #9FE1CB; }
+  .p1 .badge { background: #9FE1CB; color: #085041; }
+  .p1 .dot { background: #1D9E75; }
+  .p2 { background: #EEEDFE; border: 1px solid #CECBF6; }
+  .p2 .badge { background: #CECBF6; color: #26215C; }
+  .p2 .dot { background: #7F77DD; }
+  .p3 { background: #FAEEDA; border: 1px solid #FAC775; }
+  .p3 .badge { background: #FAC775; color: #412402; }
+  .p3 .dot { background: #BA7517; }
+  .p4 { background: #FAECE7; border: 1px solid #F5C4B3; }
+  .p4 .badge { background: #F5C4B3; color: #4A1B0C; }
+  .p4 .dot { background: #D85A30; }
+  .p5 { background: #EAF3DE; border: 1px solid #C0DD97; }
+  .p5 .badge { background: #C0DD97; color: #173404; }
+  .p5 .dot { background: #639922; }
+
+  @media (prefers-color-scheme: dark) {
+    .p1 { background: #04342C; border-color: #085041; }
+    .p1 .badge { background: #0F6E56; color: #9FE1CB; }
+    .p2 { background: #26215C; border-color: #3C3489; }
+    .p2 .badge { background: #3C3489; color: #CECBF6; }
+    .p3 { background: #412402; border-color: #633806; }
+    .p3 .badge { background: #633806; color: #FAC775; }
+    .p4 { background: #4A1B0C; border-color: #712B13; }
+    .p4 .badge { background: #712B13; color: #F5C4B3; }
+    .p5 { background: #173404; border-color: #27500A; }
+    .p5 .badge { background: #27500A; color: #C0DD97; }
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="phase p1">
+    <div class="phase-header">
+      <span class="badge">Phase 1</span>
+      <span class="phase-title">Data Pipeline</span>
+    </div>
+    <div class="steps">
+      <div class="step" onclick="sendPrompt('How do I collect and scrape raw text data for training an AI from scratch?')"><span class="dot p1"></span>Collect raw text (books, web, Q&amp;A)</div>
+      <div class="step" onclick="sendPrompt('How do I clean and deduplicate training data for an AI?')"><span class="dot p1"></span>Clean, filter &amp; deduplicate</div>
+      <div class="step" onclick="sendPrompt('How does BPE tokenization work and how do I build one from scratch?')"><span class="dot p1"></span>Build tokenizer (BPE or char-level)</div>
+      <div class="step" onclick="sendPrompt('How do I create training batches and shard datasets for a language model?')"><span class="dot p1"></span>Batch, shard &amp; shuffle dataset</div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+  <div class="phase p2">
+    <div class="phase-header">
+      <span class="badge">Phase 2</span>
+      <span class="phase-title">Model Architecture</span>
+    </div>
+    <div class="steps">
+      <div class="step" onclick="sendPrompt('How do I build an embedding layer from scratch with NumPy?')"><span class="dot p2"></span>Token + positional embeddings</div>
+      <div class="step" onclick="sendPrompt('How does multi-head self-attention work and how do I implement it from scratch?')"><span class="dot p2"></span>Multi-head self-attention</div>
+      <div class="step" onclick="sendPrompt('How do I implement a feed-forward MLP sublayer inside a transformer block?')"><span class="dot p2"></span>Feed-forward MLP sublayer</div>
+      <div class="step" onclick="sendPrompt('How does layer normalization and residual connections work in a transformer?')"><span class="dot p2"></span>Layer norm + residual connections</div>
+      <div class="step" onclick="sendPrompt('How do I stack multiple transformer blocks to make a deeper model?')"><span class="dot p2"></span>Stack N transformer blocks</div>
+      <div class="step" onclick="sendPrompt('How does the output projection to vocabulary work in a language model?')"><span class="dot p2"></span>Output projection to vocab</div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+  <div class="phase p3">
+    <div class="phase-header">
+      <span class="badge">Phase 3</span>
+      <span class="phase-title">Training Loop</span>
+    </div>
+    <div class="steps">
+      <div class="step" onclick="sendPrompt('How does the forward pass work in a transformer language model?')"><span class="dot p3"></span>Forward pass through model</div>
+      <div class="step" onclick="sendPrompt('How do I compute cross-entropy loss from scratch in NumPy?')"><span class="dot p3"></span>Cross-entropy loss computation</div>
+      <div class="step" onclick="sendPrompt('How does backpropagation work through a transformer from scratch?')"><span class="dot p3"></span>Backpropagation (BPTT)</div>
+      <div class="step" onclick="sendPrompt('How do I implement the Adam optimizer from scratch in NumPy?')"><span class="dot p3"></span>Adam optimizer + gradient clip</div>
+      <div class="step" onclick="sendPrompt('How does a learning rate scheduler work and which one should I use?')"><span class="dot p3"></span>LR scheduler (warmup + decay)</div>
+      <div class="step" onclick="sendPrompt('How do I use mixed precision or other tricks to train faster with limited hardware?')"><span class="dot p3"></span>Efficient training on limited hardware</div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+  <div class="phase p4">
+    <div class="phase-header">
+      <span class="badge">Phase 4</span>
+      <span class="phase-title">Evaluation &amp; Tuning</span>
+    </div>
+    <div class="steps">
+      <div class="step" onclick="sendPrompt('How do I compute perplexity to evaluate a language model?')"><span class="dot p4"></span>Perplexity on validation set</div>
+      <div class="step" onclick="sendPrompt('How do I implement BLEU or ROUGE scoring for text generation evaluation?')"><span class="dot p4"></span>BLEU / ROUGE scoring</div>
+      <div class="step" onclick="sendPrompt('How do I implement checkpoint saving and loading for my AI model?')"><span class="dot p4"></span>Save &amp; load checkpoints</div>
+      <div class="step" onclick="sendPrompt('How do I fine-tune a pre-trained language model on a custom dataset?')"><span class="dot p4"></span>Fine-tune on custom domain data</div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-head"></div></div>
+
+  <div class="phase p5">
+    <div class="phase-header">
+      <span class="badge">Phase 5</span>
+      <span class="phase-title">Inference &amp; Deployment</span>
+    </div>
+    <div class="steps">
+      <div class="step" onclick="sendPrompt('How does temperature sampling work in text generation?')"><span class="dot p5"></span>Temperature &amp; top-k sampling</div>
+      <div class="step" onclick="sendPrompt('How does beam search work for better text generation?')"><span class="dot p5"></span>Beam search decoding</div>
+      <div class="step" onclick="sendPrompt('How do I quantize a model to reduce memory and speed up inference?')"><span class="dot p5"></span>Quantize model (int8 / float16)</div>
+      <div class="step" onclick="sendPrompt('How do I serve my AI model as a local API with no heavy dependencies?')"><span class="dot p5"></span>Serve as lightweight local API</div>
+    </div>
+  </div>
+
+</div>
